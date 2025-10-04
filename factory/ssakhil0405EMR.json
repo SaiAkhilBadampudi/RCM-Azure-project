@@ -1,0 +1,9 @@
+{
+	"name": "ssakhil0405EMR",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "0e872d83-6764-4a2c-bb86-4a5bf5af71da",
+		"tenantId": "45ca6489-563d-4610-a1ef-168ef0a34ea1"
+	}
+}
