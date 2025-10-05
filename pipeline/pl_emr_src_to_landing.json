@@ -51,6 +51,10 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"items": {
+						"value": "@activity('LKP_EMR_Configs').output.value",
+						"type": "Expression"
+					},
 					"activities": [
 						{
 							"name": "File_Exists",
