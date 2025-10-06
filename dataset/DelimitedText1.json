@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileSystem": "emr-h-a"
+				"fileSystem": "emr-h-b"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

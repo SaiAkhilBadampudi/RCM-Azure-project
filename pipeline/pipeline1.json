@@ -56,8 +56,8 @@
 							"dependsOn": [],
 							"policy": {
 								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
+								"retry": 3,
+								"retryIntervalInSeconds": 60,
 								"secureOutput": false,
 								"secureInput": false
 							},
@@ -104,7 +104,7 @@
 									"referenceName": "generic_sql_ds",
 									"type": "DatasetReference",
 									"parameters": {
-										"db_name": "hospitals-a",
+										"db_name": "hospitals-b",
 										"schema_name": "dbo",
 										"table_name": "@replace(item().name, '.csv', '')"
 									}
