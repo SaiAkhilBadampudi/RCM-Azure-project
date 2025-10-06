@@ -104,7 +104,7 @@
 									"referenceName": "generic_sql_ds",
 									"type": "DatasetReference",
 									"parameters": {
-										"db_name": "hospitals-b",
+										"db_name": "hospitals-a",
 										"schema_name": "dbo",
 										"table_name": "@replace(item().name, '.csv', '')"
 									}
