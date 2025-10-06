@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "EMR-pipeline",
 	"properties": {
 		"activities": [
 			{
