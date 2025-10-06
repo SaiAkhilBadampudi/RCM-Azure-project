@@ -143,7 +143,8 @@
 											"sink": {
 												"type": "ParquetSink",
 												"storeSettings": {
-													"type": "AzureBlobFSWriteSettings"
+													"type": "AzureBlobFSWriteSettings",
+													"copyBehavior": "PreserveHierarchy"
 												},
 												"formatSettings": {
 													"type": "ParquetWriteSettings"
@@ -165,7 +166,10 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"container": "bronze",
-													"file_path": "@ITEM",
+													"file_path": {
+														"value": "@item().targetpath",
+														"type": "Expression"
+													},
 													"file_name": {
 														"value": "@split(item().tablename,'.')[1]",
 														"type": "Expression"
@@ -228,7 +232,7 @@
 											"source": {
 												"type": "AzureDatabricksDeltaLakeSource",
 												"query": {
-													"value": "@concat('select coalesce(cast(max(loaddate) as date),''',\n'1900-01-01',''') as last_fetched_date from audit.load_logs where','data_source=''',item().data_source,''' and tablename=''',item().tablename,'''')",
+													"value": "@concat('select coalesce(cast(max(loaddate) as date),''',\n'1900-01-01',''') as last_fetched_date from audit.load_logs where ','data_source=''',item().datasource,''' and tablename=''',item().tablename,'''')",
 													"type": "Expression"
 												}
 											},
@@ -265,7 +269,10 @@
 										"typeProperties": {
 											"source": {
 												"type": "AzureSqlSource",
-												"sqlReaderQuery": "@concat('select *,''',item().datasource,''' as datasource from\n',item().tablename,' where ',item().watermark,' >=\n''',activity('Fetch_logs').output.firstRow.last_fetched_date,'''')",
+												"sqlReaderQuery": {
+													"value": "@concat('select *,''',item().datasource,''' as datasource from ',item().tablename,' where ',item().watermark,' >= ''',formatDateTime(activity('Fetch_logs').output.value[0].last_fetched_date,'yyyy-MM-dd HH:mm:ss.fff'),'''')",
+													"type": "Expression"
+												},
 												"queryTimeout": "02:00:00",
 												"partitionOption": "None"
 											},
@@ -385,7 +392,8 @@
 											"sink": {
 												"type": "ParquetSink",
 												"storeSettings": {
-													"type": "AzureBlobFSWriteSettings"
+													"type": "AzureBlobFSWriteSettings",
+													"copyBehavior": "PreserveHierarchy"
 												},
 												"formatSettings": {
 													"type": "ParquetWriteSettings"
